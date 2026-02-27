@@ -22,6 +22,14 @@ describe("Task 1", () => {
       const response = await getTask1("");
       expect(response.status).toBe(400);
     });
+    it("own test 1", async () => {
+      const response = await getTask1("ALPHA               ALFREDO");
+      expect(response.body).toStrictEqual({ msg: "Alpha Alfredo" });
+    })
+    it("own test 2", async() => {
+      const response = await getTask1("ALPHA___----____alfredo");
+      expect(response.body).toStrictEqual({ msg: "Alpha Alfredo" });
+    })
   });
 });
 
@@ -119,6 +127,7 @@ describe("Task 3", () => {
         name: "beef",
         cookTime: 2,
       });
+
       expect(resp.status).toBe(200);
 
       const resp2 = await getTask3("beef");
@@ -158,4 +167,6 @@ describe("Task 3", () => {
       expect(resp3.status).toBe(200);
     });
   });
+  // Tested with curl to make sure things were addded
+  // to the cookbook correctly 
 });
