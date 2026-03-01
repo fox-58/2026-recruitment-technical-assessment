@@ -47,3 +47,24 @@ Overall: No clue if the dockerfile works properly, if any of it makes sense espe
 
 <!-- TODO: Document your process for deploying Navidrome on Kubernetes -->
 Did not get this done before the submission deadline, will work on this in the future hopefully.
+
+Update: I watched a tutorial on minikube, had a few issues with downloading, but they all got solved fairly quickly. I just accidentally installed the wrong architecture.
+
+Then, for the translate I used the command `kompose convert`. This did not work first time, however. I tried using a different sample yaml file found on the minikube website, and this worked so I knew it was not an issue with finding the file. 
+
+As I copied and pasted the file, I did not thoroughly read it so initially thought the only issue was I did not fix the path names. 
+
+I kept still getting the same error, and I realised that the `environment` section did not have a correctly formatted `key: value` pair that would be parsed correct. So, I changed the environment to empty and successfully converted the files into manifests.
+
+Then came the issue of applying them locally. 
+```inikube service navidrome                         
+┌───────────┬───────────┬─────────────┬──────────────┐
+│ NAMESPACE │   NAME    │ TARGET PORT │     URL      │
+├───────────┼───────────┼─────────────┼──────────────┤
+│ default   │ navidrome │             │ No node port │
+└───────────┴───────────┴─────────────┴──────────────┘
+😿  service default/navidrome has no node port
+❗  Services [default/navidrome] have type "ClusterIP" not meant to be exposed, however for local development minikube allows you to access this !
+```
+So, I will need to port forward in order to access it. Doing this through kubectl, I successfully accessed the application locally. Yay!
+
