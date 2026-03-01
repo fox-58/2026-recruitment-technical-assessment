@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    user: "1000:1000"
+    ports:
+      - "4533:4533"
+    restart: unless-stopped
+    environment: {}   # empty??
+    volumes:
+      - "/home/fox-58/navidrome-data:/data"
+      - "/home/fox-58/Music:/music:ro"
